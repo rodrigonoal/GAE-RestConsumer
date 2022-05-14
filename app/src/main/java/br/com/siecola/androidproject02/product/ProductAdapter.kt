@@ -1,5 +1,6 @@
 package br.com.siecola.androidproject02.product
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import br.com.siecola.androidproject02.network.Product
@@ -15,25 +16,41 @@ class ProductAdapter(val onProductClickListener: ProductClickListener) :
         parent: ViewGroup,
         viewType: Int
     ): ProductAdapter.ProductViewHolder {
-        TODO("Not yet implemented")
+        return ProductViewHolder(ItemProductBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: ProductAdapter.ProductViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val product = getItem(position)
+        holder.bind(product)
+        holder.itemView.setOnClickListener {
+            onProductClickListener.onClick(product)
+        }
     }
 
     class ProductViewHolder(private var binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(product: Product) { //product está no xml (item_product)
+        fun bind(product: Product) {
+                //product está no xml (item_product)
                 binding.product = product
                 binding.executePendingBindings()
             }
         }
 
-    class ProductDiff: DiffUtil.ItemCallback<Product>() {
+    object ProductDiff: DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-            TODO("Not yet implemented")
+            return oldItem.id == newItem.id
         }
+
+        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+            return ((oldItem.id == newItem.id) &&
+                    (oldItem.name == newItem.name) &&
+                    (oldItem.code == newItem.code) &&
+                    (oldItem.price == newItem.price))
+        }
+    }
+
+    class ProductClickListener(val clickListener: (product: Product) -> Unit) {
+        fun onClick(product: Product) = clickListener(product)
     }
 }
 
