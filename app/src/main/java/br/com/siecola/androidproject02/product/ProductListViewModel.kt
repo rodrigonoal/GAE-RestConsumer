@@ -30,6 +30,10 @@ class ProductListViewModel: ViewModel() {
         getProducts()
     }
 
+    fun refreshProducts() {
+        getProducts()
+    }
+
     //aqui passamos a responsabilidade para outro thread
     //tudo que rodar dentrod o launch é assíncrono
     private fun getProducts() {
