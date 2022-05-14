@@ -10,6 +10,8 @@ import kotlinx.coroutines.launch
 
 private const val TAG = "ProductListViewModel"
 
+//aqui utilizamos o view model
+//ele nos permite manter uma série de processos fora da thread de UI
 class ProductListViewModel: ViewModel() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
