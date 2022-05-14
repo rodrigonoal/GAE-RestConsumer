@@ -9,7 +9,7 @@ import okhttp3.Route
 
 private const val TAG = "OauthTokenAuthenticator"
 
-class OauthTokenAuthenticator(): Authenticator {
+class OauthTokenAuthenticator : Authenticator {
 
     override fun authenticate(route: Route?, response: Response): Request? {
         val token = retrieveNewToken()
@@ -26,7 +26,7 @@ class OauthTokenAuthenticator(): Authenticator {
         Log.i(TAG, "Retrieving new token")
 
         //exemplo hardcoded de como seria uma requisição de token:
-        return  SalesApi.retrofitService.getToken(
+        return SalesApi.retrofitService.getToken(
             "Basic c2llY29sYTptYXRpbGRl",
             "password",
             "rodrigo@noal.com",
