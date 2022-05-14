@@ -70,11 +70,11 @@
             android:paddingEnd="8dip"
             android:paddingBottom="12dip"
             app:productPrice="@{product.price}"
+            tools:text="$ 30,00"
             android:textAlignment="center"
             android:textSize="14sp"
             android:textStyle="normal"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="$ 30,00" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </LinearLayout>
 </layout>
