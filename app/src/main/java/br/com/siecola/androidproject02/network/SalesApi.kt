@@ -4,16 +4,20 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
+import okhttp3.Authenticator
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.create
 import retrofit2.http.*
 import java.util.concurrent.TimeUnit
 
 
 //obs: android acessa apenas https nativamente!
-private const val BASE_URL = " https://sales-provider.appspot.com"
+private const val BASE_URL = "https://sales-provider.appspot.com/"
+private const val PRODUCT_PARAMS = "api/products"
+private const val OAUTH_PARAMS = "oauth/token"
 
 //aqui configuramos o Moshi
 //ele é quem adapta nosso Json para Kotlin e vice versa
@@ -38,8 +42,30 @@ private val retrofit = Retrofit.Builder()
     .client(okHttpClient)
     .build()
 
+interface SalesApiService {
+
+    @GET(PRODUCT_PARAMS) //método - url
+    fun getProducts(): Deferred<List<Product>> // getProduts recebe uma lista de produtos (de forma assíncrona)
+
+    @POST(OAUTH_PARAMS)
+    @FormUrlEncoded
+    fun getToken(
+        @Header("Authorization") basicAuthentication: String,
+        @Field("grant_type") grantType: String,
+        @Field("username") username: String,
+        @Field("password") password: String
+    ): Call<OauthTokenResponse>
+    //no caso do auth, incluímos todos os parâmetros e utilizamos "call" para que ele faça imediatamente
+
+}
+
 //object cria diretamente um objeto
 //em outras palavras, não preciso criar uma classe e então instanciar um objeto
 //para acessar seus métodos etc
 object SalesApi {
+
+    //inicialização preguiçosa da interface acima
+    val retrofitService: SalesApiService by lazy {
+        retrofit.create(SalesApiService::class.java)
+    }
 }
