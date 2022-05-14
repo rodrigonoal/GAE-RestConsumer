@@ -12,5 +12,6 @@ class MainActivity : AppCompatActivity() {
 
         //teste de implementação simples
         val viewModel = ViewModelProvider(this).get(ProductListViewModel::class.java)
+
     }
 }

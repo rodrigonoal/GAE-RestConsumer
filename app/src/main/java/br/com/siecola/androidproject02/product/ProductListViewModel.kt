@@ -15,6 +15,10 @@ class ProductListViewModel: ViewModel() {
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
     //utilizando co-rotina de escopo
 
+    init {
+        getProducts()
+    }
+
     //aqui passamos a responsabilidade para outro thread
     //tudo que rodar dentrod o launch é assíncrono
     private fun getProducts() {
