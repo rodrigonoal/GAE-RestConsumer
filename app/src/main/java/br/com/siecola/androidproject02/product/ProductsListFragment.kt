@@ -34,9 +34,8 @@ class ProductsListFragment: Fragment() {
         binding.rcvProducts.addItemDecoration(itemDecor)
 
         binding.rcvProducts.adapter = ProductAdapter(ProductAdapter.ProductClickListener { product ->
-            Log.i(TAG, "Product selected: ${product.name}")
+            Log.i(TAG, "Product selected: ${product.code}")
         })
-
 
         return binding.root
     }
