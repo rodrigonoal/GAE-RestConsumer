@@ -11,5 +11,71 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+        <!--
+         O primeiro text view define tais propriedades:
+         0 width com layout weight 0.40 faz com que ele tome 40% da página
+         as constraints são o que limitam a minha tag
+         tools:text permite que adicionemos um texto de placeholder apenas para desenvolvimento
+         @{product.name} é uma forma de inserir uma variável na UI
+         -->
+        <TextView
+            android:id="@+id/txtProductListItemName"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="0.40"
+            android:paddingStart="8dip"
+            android:paddingTop="12dip"
+            android:paddingBottom="12dip"
+            android:text="@{product.name}"
+            android:textAlignment="viewStart"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toStartOf="@+id/txtProductListItemCode"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Product 1"
+            />
+
+        <TextView
+            android:id="@+id/txtProductListItemCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="0.30"
+            android:minWidth="70dp"
+            android:paddingStart="8dip"
+            android:paddingTop="12dip"
+            android:paddingEnd="8dip"
+            android:paddingBottom="12dip"
+            android:text="@{product.code}"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toStartOf="@+id/txtProductListItemPrice"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="COD123" />
+
+        <TextView
+            android:id="@+id/txtProductListItemPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="0.30"
+            android:minWidth="40dp"
+            android:paddingStart="8dip"
+            android:paddingTop="12dip"
+            android:paddingEnd="8dip"
+            android:paddingBottom="12dip"
+            android:text="---"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="$ 30,00" />
+
+
     </LinearLayout>
 </layout>
