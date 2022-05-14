@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import br.com.siecola.androidproject02.databinding.FragmentProductsListBinding
@@ -33,9 +34,14 @@ class ProductsListFragment: Fragment() {
 
         binding.rcvProducts.addItemDecoration(itemDecor)
 
-        binding.rcvProducts.adapter = ProductAdapter(ProductAdapter.ProductClickListener { product ->
-            Log.i(TAG, "Product selected: ${product.code}")
-        })
+        binding.rcvProducts.adapter =
+            ProductAdapter(ProductAdapter.ProductClickListener { product ->
+                Log.i(TAG, "Product selected: ${product.code}")
+
+                //aqui é onde chamamos o outro fragmento
+                this.findNavController()
+                    .navigate(ProductsListFragmentDirections.actionShowProductDetail(product.code))
+            })
 
         return binding.root
     }
