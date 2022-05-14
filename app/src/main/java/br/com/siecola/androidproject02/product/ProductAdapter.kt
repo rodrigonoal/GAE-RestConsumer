@@ -15,11 +15,11 @@ class ProductAdapter(val onProductClickListener: ProductClickListener) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ProductAdapter.ProductViewHolder {
+    ): ProductViewHolder {
         return ProductViewHolder(ItemProductBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: ProductAdapter.ProductViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = getItem(position)
         holder.bind(product)
         holder.itemView.setOnClickListener {
