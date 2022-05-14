@@ -12,7 +12,7 @@ class SharedPreferenceUtils {
 
     fun saveToken(accessToken: String, expiresIn: Int) {
         //estamos recebendo em segundos e precisamos transformar numa data final
-        val absoluteExpiration = ((System.currentTimeMillis() /1000) + expiresIn).toInt()
+        var absoluteExpiration = ((System.currentTimeMillis() /1000) + expiresIn).toInt()
 
         //abrindo o contexto, editando, guardando uma string com sua chave
         with(getSharedPreferences().edit()) {
@@ -22,6 +22,23 @@ class SharedPreferenceUtils {
         }
     }
 
+    // quando fizermos requisições, utilizaremos este método
+    fun getAccessToken(): String? {
+        var accessToken: String? = null
+
+        with (getSharedPreferences()) {
+            if(contains(ACCESS_TOKEN) && contains(EXPIRES_IN)) {
+                val expiresIn = getInt(EXPIRES_IN, 0)
+                val currentTime = System.currentTimeMillis() / 1000
+
+                if(currentTime < expiresIn) {
+                    accessToken = getString(ACCESS_TOKEN, "")
+                }
+            }
+        }
+
+        return accessToken
+    }
 
 
     //estabelecendo o ciclo de contexto
