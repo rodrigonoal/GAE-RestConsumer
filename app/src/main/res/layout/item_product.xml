@@ -76,6 +76,5 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="$ 30,00" />
 
-
     </LinearLayout>
 </layout>
