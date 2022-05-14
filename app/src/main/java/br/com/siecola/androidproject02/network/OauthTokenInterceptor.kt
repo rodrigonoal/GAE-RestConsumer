@@ -15,7 +15,7 @@ class OauthTokenInterceptor: Interceptor {
         val accessToken = SharedPreferencesUtils.getAccessToken()
 
         if(accessToken != null) {
-            Log.i(TAG, "Using the ecxisting token")
+            Log.i(TAG, "Using the existing token")
             request = request.newBuilder()
                 .addHeader("Authorization", "Bearer ${accessToken}")
                 .build()
