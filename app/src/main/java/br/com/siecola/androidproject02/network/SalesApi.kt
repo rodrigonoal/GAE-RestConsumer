@@ -45,6 +45,9 @@ interface SalesApiService {
     @GET(PRODUCT_PARAMS) //método - url
     fun getProducts(): Deferred<List<Product>> // getProduts recebe uma lista de produtos (de forma assíncrona)
 
+    @GET("${PRODUCT_PARAMS}/{code}")
+    fun getProductByCode(@Path("code") code: String): Deferred<Product>
+
     @POST(OAUTH_PARAMS)
     @FormUrlEncoded
     fun getToken(
