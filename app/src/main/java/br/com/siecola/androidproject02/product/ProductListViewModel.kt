@@ -1,7 +1,10 @@
 package br.com.siecola.androidproject02.product
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import br.com.siecola.androidproject02.network.Product
 import br.com.siecola.androidproject02.network.SalesApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +19,12 @@ class ProductListViewModel: ViewModel() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
     //utilizando co-rotina de escopo
+
+    //aqui criamos atributos para guardar os dados variáveis dos produtos
+    private val _products = MutableLiveData<List<Product>>()
+    val products: LiveData<List<Product>>
+        get() = _products
+
 
     init {
         getProducts()
@@ -32,6 +41,8 @@ class ProductListViewModel: ViewModel() {
             Log.i(TAG, "Fetching products")
 
             val productsList = getProductsDeferred.await()
+
+            _products.value = productsList
 
             Log.i(TAG, "Number of products = ${productsList.size}")
         }
