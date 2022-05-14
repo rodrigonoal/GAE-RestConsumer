@@ -1,7 +1,7 @@
 package br.com.siecola.androidproject02.network
 
 import android.util.Log
-import br.com.siecola.androidproject02.util.SharedPreferenceUtils
+import br.com.siecola.androidproject02.util.SharedPreferencesUtils
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
@@ -14,7 +14,7 @@ class OauthTokenAuthenticator(): Authenticator {
 
     override fun authenticate(route: Route?, response: Response): Request? {
         val token = retrieveNewToken()
-        SharedPreferenceUtils.saveToken(token.accessToken, token.expiresIn)
+        SharedPreferencesUtils.saveToken(token.accessToken, token.expiresIn)
 
         return response
             .request()
@@ -23,7 +23,7 @@ class OauthTokenAuthenticator(): Authenticator {
             .build()
     }
 
-    private fun retrieveNewToken(): Call<OauthTokenResponse> {
+    private fun retrieveNewToken(): OauthTokenResponse {
         Log.i(TAG, "Retrieving new token")
 
         //exemplo hardcoded de como seria uma requisição de token:

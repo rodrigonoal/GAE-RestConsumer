@@ -8,7 +8,7 @@ import br.com.siecola.androidproject02.MainApplication
 private const val ACCESS_TOKEN = "access_token"
 private const val EXPIRES_IN = "expires_in"
 
-class SharedPreferenceUtils {
+object SharedPreferencesUtils {
 
     fun saveToken(accessToken: String, expiresIn: Int) {
         //estamos recebendo em segundos e precisamos transformar numa data final
