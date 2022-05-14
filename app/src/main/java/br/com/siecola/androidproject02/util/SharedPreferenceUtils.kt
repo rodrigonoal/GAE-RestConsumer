@@ -10,6 +10,18 @@ private const val EXPIRES_IN = "expires_in"
 
 class SharedPreferenceUtils {
 
+    fun saveToken(accessToken: String, expiresIn: Int) {
+        //estamos recebendo em segundos e precisamos transformar numa data final
+        val absoluteExpiration = ((System.currentTimeMillis() /1000) + expiresIn).toInt()
+
+        //abrindo o contexto, editando, guardando uma string com sua chave
+        with(getSharedPreferences().edit()) {
+            putString(ACCESS_TOKEN, accessToken)
+            putInt(EXPIRES_IN, absoluteExpiration)
+            commit()
+        }
+    }
+
 
 
     //estabelecendo o ciclo de contexto
