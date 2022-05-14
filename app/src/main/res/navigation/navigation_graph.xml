@@ -9,6 +9,9 @@
         android:name="br.com.siecola.androidproject02.product.ProductsListFragment"
         android:label="fragment_products_list"
         tools:layout="@layout/fragment_products_list" >
+        <action
+            android:id="@+id/action_showProductDetail"
+            app:destination="@id/fragmentProductDetail" />
     </fragment>
     <fragment
         android:id="@+id/fragmentProductDetail"
