@@ -26,7 +26,7 @@ class ProductDetailViewModel(private val code: String): ViewModel() {
     }
 
     private fun getProduct() {
-        Log.i(TAG, "Preparing request q product by its code")
+        Log.i(TAG, "Preparing request to get product by its code")
         coroutineScope.launch {
             _product.value = SalesApi.retrofitService.getProductByCode(code).await()
         }
